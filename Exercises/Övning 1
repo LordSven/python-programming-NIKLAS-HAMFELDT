@@ -1,0 +1,114 @@
+Count with Python
+These are introductory exercises in Python for fundamental mathematics. It is important to both know mathematics as well as Python in order to understand machine learning concepts. Also a focus here is to use Python as a tool for solving mathematical problems.
+
+Remember to use variables in your computations
+
+Remember to format your answers in a neat way using f-strings
+
+The number of stars (*), (**), (***) denotes the difficulty level of the task
+
+1. Pythagorean theorem (*)
+  a)   A right angled triangle has the catheti: a = 3 and b = 4 length units. Compute the hypothenuse of the triangle. (*)
+
+  b)   A right angled triangle has hypothenuse c = 7.0 and a cathetus a = 5.0 length units. Compute the other cathetus and round to one decimal. (*)
+
+
+
+Hint
+Video lecture (swedish)
+
+To do square root in Python
+
+import math
+math.sqrt()
+
+Answer a)
+The hypothenuse is 5 length units
+b)
+
+The other cathetus is 4.9 length units
+2. Classification accuracy (*)
+A machine learning algorithm has been trained to predict whether or not it would rain the next day. Out of 365 predictions, it got 300 correct, compute the accuracy of this model.
+
+3. Classification accuracy (*)
+A machine learning model has been trained to detect fire. Here is the result of its predictions:
+
+True Positive (TP)
+Reality: fire
+Predicted: fire
+Number of TP: 2
+False Positive (FP)
+Reality: no fire
+Predicted: fire
+Number of FP: 2
+False Negative (FN)
+Reality: fire
+Predicted: no fire
+Number of FN: 11
+True Negative (TN)
+Reality: no fire
+Predicted: no fire
+Number of TN: 985
+Calculated the accuracy using the following formula:
+
+ 
+
+Is this a good model?
+
+Hint
+Try to understand what it means for the actual user with each category
+
+
+Answer
+The accuracy of this model is 0.987.
+4. Line (*)
+Compute the slope 
+ and the constant term 
+ of this line using the points 
+ and 
+.
+
+
+
+Hint
+ 
+ 
+
+Either plug in one point into 
+ and solve for 
+ or read the intersection with y-axis in the graph.
+
+Video lecture (Swedish)
+
+
+Solution
+k = 0.75, m = 1, so the equation for the slope is y = 0.75x + 1
+5. Euclidean distance (*)
+The Euclideam distance between the points 
+ and 
+ is the length of a line between them. Let 
+ and 
+ and compute the distance between them.
+
+Hint The formula is:
+
+Video lecture (Swedish)
+
+
+Answer
+The distance is around 5.1 length units.
+6. Euclidean distance in 3D (**)
+Calculate the distance between the points 
+ and 
+
+Hint
+Let 
+ and 
+
+, where 
+ is the Euclidean distance between 
+ and 
+
+
+Answer
+The distance is around 4.12 l.u.
