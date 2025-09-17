@@ -32,7 +32,7 @@ while nummer2 <= 96:
 
 # uppgift 3
 import random
-print('3a) ',end=' ')
+print('3a)',end=' ')
 gissningar = 0
 rnummer = random.randint(1, 100)
 gissning = int(input('Du har fem försök på dig att gissa på en siffra från 1 - 100: '))
@@ -68,3 +68,104 @@ if gissning == rnummer:
     print(f'Datorn gissade rätt, siffran var {rnummer}!')
 else:
     print(f'Datorn var inte bättre än vad du var.')
+
+# uppgift 4a
+rgissningar = 0
+svar = input('Vill du spela ett spel? ')
+ja = 'Tryck y för ja'
+nej = 'Tryck n för nej'
+while svar == 'y':
+    x = random.randint(1, 10)
+    y = random.randint(1, 10)
+    print(f'Vad blir {x} * {y}?')
+    gissning = input()
+    if int(gissning) == x * y:
+        print('Bra jobbat!')
+        rgissningar += 1
+        print(f'{ja}\n{nej}')
+        svar = input('Vill du spela igen? ')         
+    elif int(gissning) != x * y:
+        print(f'Du svarade {gissning} men rätt svar var {x * y}.')
+        print(f'{ja}\n{nej}')
+        svar = input('Vill du spela igen? ')
+    elif svar == 'n':
+        break
+    else:
+        print('Du måste välja y eller n ')
+print(f'Tack för att du spelade, du svarade rätt {rgissningar} gånger')
+# uppgift 4b/c
+rgissningar = 0
+svar = input('Vill du spela ett spel? ')
+while svar == 'ja' or svar == 'Ja' or svar == 'jo' or svar == 'Jo':
+    svar = input('Välj svårighetsgrad 1 för Lätt, 2 för Medel eller 3 för Svår ')
+    if svar == '1':
+        x = random.randint(1, 10)
+        y = random.randint(1, 10)
+        print(f'Vad blir {x} * {y}?')
+        svar = input()
+        if int(svar) == x * y:
+            print('Bra jobbat!')
+            rgissningar += 1
+            svar = input('Vill du spela igen? ')         
+        elif int(svar) != x * y:
+            print(f'Du svarade {svar} men rätt svar var {x * y}.')
+            svar = input('Vill du spela igen? ')
+        elif svar == 'stopp':
+            break
+    elif svar == '2':
+        x = random.randint(5, 20)
+        y = random.randint(5, 20)
+        print(f'Vad blir {x} * {y}?')
+        svar = input()
+        if int(svar) == x * y:
+            print('Bra jobbat!')
+            rgissningar += 1
+            svar = input('Vill du spela igen? ')         
+        elif int(svar) != x * y:
+            print(f'Du svarade {svar} men rätt svar var {x * y}.')
+            svar = input('Vill du spela igen? ')
+        elif svar == 'stopp':
+            break
+    elif svar == '3':
+        x = random.randint(15, 40)
+        y = random.randint(15, 40)
+        print(f'Vad blir {x} * {y}?')
+        svar = input()
+        if int(svar) == x * y:
+            print('Bra jobbat!')
+            rgissningar += 1
+            svar = input('Vill du spela igen? ')         
+        elif int(svar) != x * y:
+            print(f'Du svarade {svar} men rätt svar var {x * y}.')
+            svar = input('Vill du spela igen? ')
+        elif svar == 'stopp':
+            break
+    else:
+        svar = input('Vill inte längre spela vidare? ')
+if rgissningar == 1:
+    print(f'Tack för att du spelade, du svarade rätt {rgissningar} gång')
+elif rgissningar > 1:
+    print(f'Tack för att du spelade, du svarade rätt {rgissningar} gånger')
+else:
+    print('Antingen försökte du inte spela eller så behöver du träna på din multiplikation')
+
+#uppgift 5a
+slut = input('Välj ett väldigt lågt decimaltal: ')
+a = 1
+n = 0
+summa = 0
+while a > float(slut):
+    summa += a
+    n += 1
+    a = 1 / (2 ** n)
+    print(f'Summan konvergerade till {summa} efter {n} termer')
+# uppgift 5b
+slut2 = input('Välj ett tal som motsvarar hur många decimaler konvergensen ska vara från 0 innan programmet stannar (förslagsvis max 6 decimaler): ')
+a = 1
+n = 0
+summa = 0
+while abs(a) > float(slut2):
+    a = ((-1) ** n) / ((2 * n) + 1)
+    summa += a
+    n += 1
+    print(f'Summan konvergerade till {summa} efter {n} termer')
