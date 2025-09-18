@@ -62,7 +62,10 @@ print(f'Rätt svar var {tal}')
 
 # uppgift 6
 ris = 1
+print('Upplägget av ris per ruta blir såhär:')
 for x in range(8):
     for y in range(8):
-        ris *= 2
-print(f'När schackbrädets sista ruta fyllts skulle det ha {ris - 1} riskorn på.')
+        print(f'{ris: 20}', end=' ')
+        ris *= 2        
+    print()
+print(f'Och totalt på hela brädet ligger det {ris - 1} riskorn.')
