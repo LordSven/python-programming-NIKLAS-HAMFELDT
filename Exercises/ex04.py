@@ -163,5 +163,59 @@ plt.show()
 print(f'Chans för träff är {träffar / 5000: .4f}') # vilket bör konvergera till pi/4
 
 # uppgift 7a
-print(f'Jag byter dörr för när jag först valde så hade jag 33% chans att välja rätt men när jag nu väljer så har jag')
+print(f'Jag byter dörr för när jag först valde så hade jag 33% chans att välja rätt men när jag nu väljer så har jag 67% chans att välja rätt.')
 # uppgift 7b
+print('När man inte byter dörr')
+rätt = 0
+troligheter1 = []
+def dörrval():
+    dörr = [1, 2, 3]
+    kdörr = rd.randint(1, 3)
+    gdörr = rd.randint(1, 3)
+    kvar = [d for d in dörr if d not in [kdörr, gdörr]]
+    ödörr = rd.choice(kvar)
+    dörr.remove(ödörr)
+    if kdörr == gdörr:
+        return True
+    else:
+        return False
+testpool = [10, 100, 1000, 10000, 100000, 1000000]
+for testsize in testpool:
+    resultat = [dörrval() for _ in range(testsize)]
+    trolighet1 = sum(resultat) / testsize * 100
+    troligheter1.append(trolighet1)
+    rätt = sum(resultat)
+    print(f'Vid {testsize} försök valdes rätt dörr {rätt} gånger.')
+print('När man byter dörr')
+rätt = 0
+troligheter2 = []
+def dörrval():
+    dörr = [1, 2, 3]
+    kdörr = rd.randint(1, 3)
+    gdörr = rd.randint(1, 3)
+    kvar = [d for d in dörr if d not in [kdörr, gdörr]]
+    ödörr = rd.choice(kvar)
+    dörr.remove(ödörr)
+    kvar = [d for d in dörr if d != gdörr]
+    gdörr = kvar[0]
+    if kdörr == gdörr:
+        return True
+    else:
+        return False
+testpool = [10, 100, 1000, 10000, 100000, 1000000]
+for testsize in testpool:
+    resultat = [dörrval() for _ in range(testsize)]
+    rätt = sum(resultat)
+    trolighet2 = sum(resultat) / testsize * 100
+    troligheter2.append(trolighet2)
+    print(f'Vid {testsize} försök valdes rätt dörr {rätt} gånger.')
+x_indices = range(len(testpool))
+plt.plot(x_indices, troligheter1,'-*', label='Bytte')
+plt.plot(x_indices, troligheter2, '-*', label='Bytte inte')
+plt.title('Chansen att öppna rätt dörr')
+plt.xticks(x_indices, testpool)
+plt.xlabel('Antal försök')
+plt.ylabel('Trolighet i %')
+plt.ylim(0, 100)
+plt.legend()
+plt.show()
