@@ -86,8 +86,8 @@ pikaw = [25, 24.3, 22]
 pikah = [32, 31.5, 34]
 pichuw = [20.5]
 pichuh = [34]
-pikad = list(zip(pikaw, pikah))
-pichud = list(zip(pichuw, pichuh))
+pikadim = list(zip(pikaw, pikah))
+pichudim = list(zip(pichuw, pichuh))
 sortpika = []
 sortpichu = []
 oklassad = []
@@ -95,8 +95,8 @@ pred = []
 def eucdist(td, fd):
     return np.sqrt((td[0] - fd[0])**2 + (td[1] - fd[1])**2)
 for ex in pokespec:
-    minpika = min(eucdist(ex, ref) for ref in pikad)
-    minpichu = min(eucdist(ex, ref) for ref in pichud)
+    minpika = min(eucdist(ex, ref) for ref in pikadim)
+    minpichu = min(eucdist(ex, ref) for ref in pichudim)
     if minpika < minpichu:
         sortpika.append(ex)
         pred.append(1)
@@ -108,10 +108,39 @@ for ex in pokespec:
         pred.append(-1)
 rättklassad = sum(a == b for a, b in zip(pred, pokemon))
 träffsäkerhet = rättklassad / len(pokemon)
-print(träffsäkerhet)
-plt.scatter(*zip(*pikad), color="black", marker="P", s=80, label="Pikachu refs")
-plt.scatter(*zip(*pichud), color="black", marker="X", s=75, label="Pichu ref")
+
+print(f'Träffsäkerheten är {(träffsäkerhet) * 100: .2f}%')
+plt.scatter(*zip(*pikadim), color="black", marker="P", s=80, label="Pikachu refs")
+plt.scatter(*zip(*pichudim), color="black", marker="X", s=75, label="Pichu ref")
 # scatter i if-satser för att inte stöta på felmeddelande ifall någon av listorna vore tomma
+if sortpika:
+    plt.scatter(*zip(*sortpika), color="yellow", label="Klassificerad Pikachu")
+if sortpichu:
+    plt.scatter(*zip(*sortpichu), color="tan", label="Klassificerad Pichu")
+if oklassad:
+    plt.scatter(*zip(*oklassad), color="black", label="Icke klassificerbar")
+plt.xlabel("Width")
+plt.ylabel("Height")
+plt.legend()
+plt.gca().set_aspect("equal")
+plt.show()
+
+oklassade = [ex for ex, p, t in zip(pokespec, pred, pokemon) if p != t]
+print(oklassade)
+for ex in oklassade:
+    minpika = min(eucdist(ex, ref) for ref in sortpika)
+    minpichu = min(eucdist(ex, ref) for ref in sortpichu)
+    if minpika < minpichu:
+        sortpika.append(ex)
+        pred.append(1)
+    elif minpichu < minpika:
+        sortpichu.append(ex)
+        pred.append(0)
+    else:
+        oklassad.append(ex)
+        pred.append(-1)
+plt.scatter(*zip(*pikadim), color="black", marker="P", s=80, label="Pikachu refs")
+plt.scatter(*zip(*pichudim), color="black", marker="X", s=75, label="Pichu ref")
 if sortpika:
     plt.scatter(*zip(*sortpika), color="yellow", label="Klassificerad Pikachu")
 if sortpichu:
@@ -141,8 +170,8 @@ pokedexpika = []
 pokedexpichu = []
 while True:
     for ex in pokedex:
-        minpika = min(eucdist(ex, ref) for ref in pikad)
-        minpichu = min(eucdist(ex, ref) for ref in pichud)
+        minpika = min(eucdist(ex, ref) for ref in pikadim)
+        minpichu = min(eucdist(ex, ref) for ref in pichudim)
         if minpika < minpichu:
             pokedexpika.append(ex)
             print('Det var en Pikachu')
@@ -153,8 +182,8 @@ while True:
             oklassad.append(ex)
             print('Det var en möjligtvis legendarisk pokemon då den inte kunde klassificeras')
     break
-plt.scatter(*zip(*pikad), color="black", marker="P", s=80, label="Pikachu refs")
-plt.scatter(*zip(*pichud), color="black", marker="X", s=75, label="Pichu ref")
+plt.scatter(*zip(*pikadim), color="black", marker="P", s=80, label="Pikachu refs")
+plt.scatter(*zip(*pichudim), color="black", marker="X", s=75, label="Pichu ref")
 if pokedexpika:
     plt.scatter(*zip(*pokedexpika), color="yellow", label="Klassificerad Pikachu")
 if pokedexpichu:
