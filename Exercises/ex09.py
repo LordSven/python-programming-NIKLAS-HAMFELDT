@@ -46,6 +46,6 @@ with open('morse.txt','r', encoding='utf-8') as morse:
         print(f'"{översätt}" översatt till morse är: ')
         for x in översätt:
             print(morselexikon[x] if x in morselexikon else ' ', end=' ')
-        print('\nDisclaimer: Endast bokstäver kan översättas, siffror och specialtecken ersätts av mellanslag.')
+        print('\nDisclaimer: Endast bokstäver i versal kan översättas, siffror och specialtecken ersätts av mellanslag.')
     översätt = input('Skriv ett ord eller en mening du vill få översatt till morse: ').upper()
     skriv_morse(översätt)
