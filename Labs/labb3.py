@@ -8,8 +8,8 @@ with open('unlabelled_data.csv', 'r') as rådata:
     coords = [line.strip() for line in lines]
     floatcoords = [tuple(map(float, coord.split(','))) for coord in coords]
     x, y = zip(*floatcoords)
-    center1 = (2.44, 2.22)
-    center0 = (-2.44, -2.22)
+    center1 = (2.12, 1.85)
+    center0 = (-2.12, -1.85)
     sort1 = []
     sort0 = []
     xmean, ymean = (center1[0] + center0[0]) / 2, (center1[1] + center0[1]) / 2
