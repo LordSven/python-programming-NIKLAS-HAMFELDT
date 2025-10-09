@@ -30,3 +30,5 @@ Innan jag räknade ut den mer exakta linjen hamnade alla punkter vars summa blev
 Programmet genererar även en fil `labelled_data.csv` om där inte redan finns en och skriver över innehållet i den filen om den redan finns. Där listas varje punkt med en klass (`0` eller `1`) beroende på vilken sida av linjen den ligger.
 
 ---
+## Disclaimer
+Slutligen ska bara tilläggas att jag använde chatGPT för att omvandla min text i readme-filen till markdown-format efter att ha bett chatGPT kontrollera att min text uppfyllde kriterierna för vad den skulle innehålla varpå den erbjöd att formatera om min text till vad vi har här vilket jag sedan bara städade upp lite till (Disclaimern gjorde jag själv dock och jag antar att två # gör det till en titel men jag vet inte hur jag får in de små symbolerna) 
