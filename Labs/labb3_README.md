@@ -3,7 +3,7 @@ Mitt program utför linjär klassificering av en uppsättning data från en give
 
 Jag har valt att visa två exempel:
 
-1. **Uppskattad linje:** Jag uppskattade var medelpunkten för varje kluster låg och drog en linje mellan dessa punkter som en första uppdelning.  
+1. **Uppskattad linje:** Jag uppskattade var medelpunkten för varje kluster låg och drog en linje mellan dessa punkter som en första uppdelning längst med klusterna och sedan en med motsatt lutning som delade upp dem.
 2. **Uträknad linje:** Därefter räknade jag ut en ny, mer träffsäker linje baserat på de faktiska medelvärdena för cluster0 och cluster1.
 
 ---
@@ -13,16 +13,18 @@ Jag har valt att visa två exempel:
 2. Välj om du vill mata in egna koordinater eller om du vill låta programmet slumpa fram en punkt ur den givna datan.  
 3. Programmet visar två grafer:  
    - En med den **uppskattade delande linjen**.  
-   - En med den **uträknade (korrekta) delande linjen**.  
+   - En med den **uträknade delande linjen**.  
 4. Du får även textutskrift som visar om den valda punkten ligger **över** eller **under** linjen, vilket också kan ses i graferna.
 
 ---
 
 ## 📊 Övrigt
 Anledningen till att jag valde att ha med båda graferna är att jag ville visa min tankegång för uppgiften.  
-Innan jag räknade ut den mer exakta linjen hamnade alla punkter vars summa blev 0 precis på linjen, vilket gjorde att de inte kunde klassificeras. Därför hade jag också lagt till kod som kunde:
+Innan jag räknade ut den mer exakta linjen hamnade alla punkter vars summa blev 0 precis på linjen, vilket gjorde att de inte kunde klassificeras. Därför hade jag ursprungligen med kod som kunde:
 - Ge svaret att punkten ligger *på* linjen, och  
 - Räkna antalet samt kartlägga eventuella felklassificeringar.
+Denna kod valde jag att inte ha med i det slutgiltiga programmet då det är i princip omöjligt att ange en punkt som skulle hamna på linjen efter att ha tagit fram den träffsäkra linjen.
+**Klassificering:** Jag använder både euclidean distance till både de uppskattade punkterna och de träffsäkra punkterna samt linjär klassificering mot den träffsäkra linjen.
 
 ---
 
