@@ -24,6 +24,7 @@ Innan jag räknade ut den mer exakta linjen hamnade alla punkter vars summa blev
 - Ge svaret att punkten ligger *på* linjen, och  
 - Räkna antalet samt kartlägga eventuella felklassificeringar.
 Denna kod valde jag att inte ha med i det slutgiltiga programmet då det är i princip omöjligt att ange en punkt som skulle hamna på linjen efter att ha tagit fram den träffsäkra linjen.
+
 **Klassificering:** Jag använder både euclidean distance till både de uppskattade punkterna och de träffsäkra punkterna samt linjär klassificering mot den träffsäkra linjen.
 
 ---
