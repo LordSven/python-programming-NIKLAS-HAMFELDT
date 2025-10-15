@@ -11,7 +11,7 @@ Mitt program utför linjär klassificering av en uppsättning data från en give
 ---
 
 ## 📊 Övrigt
-Efter att först ha skrivit kod som uppenbarligen hade med alldeles för mycket onödigt så som euklidiskt avstånd mellan punkterna och uppskattade mittpunkter av klusterna samt möjligheten att föra in egna punkter för klassificering så har jag nu bantat ner den till nuvarande format utifrån de synpunkter jag mottagit.
+Efter att först ha skrivit kod som uppenbarligen hade med alldeles för mycket onödigt så som euklidiskt avstånd mellan punkterna och uppskattade mittpunkter av klusterna samt möjligheten att föra in egna punkter för klassificering så har jag nu bantat ner den till nuvarande version utifrån de synpunkter jag mottagit.
 
 ---
 
