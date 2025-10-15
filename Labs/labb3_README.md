@@ -1,31 +1,17 @@
 ## 🧠 Beskrivning
-Mitt program utför linjär klassificering av en uppsättning data från en given fil (`unlabelled_data.csv`) samt eventuella egna punkter som användaren kan mata in. Punkterna klassificeras baserat på den data som lästs in.
-
-Jag har valt att visa två exempel:
-
-1. **Uppskattad linje:** Jag uppskattade var medelpunkten för varje kluster låg och drog en linje mellan dessa punkter som en första uppdelning längst med klusterna och sedan en med motsatt lutning som delade upp dem.
-2. **Uträknad linje:** Därefter räknade jag ut en ny, mer träffsäker linje baserat på de faktiska medelvärdena för cluster0 och cluster1.
+Mitt program utför linjär klassificering av en uppsättning data från en given fil (`unlabelled_data.csv`).
 
 ---
 
 ## ⚙️ Hur man använder programmet
-1. Kör Python-filen.  
-2. Välj om du vill mata in egna koordinater eller om du vill låta programmet slumpa fram en punkt ur den givna datan.  
-3. Programmet visar två grafer:  
-   - En med den **uppskattade delande linjen**.  
-   - En med den **uträknade delande linjen**.  
-4. Du får även textutskrift som visar om den valda punkten ligger **över** eller **under** linjen, vilket också kan ses i graferna.
+1. Säkerställ att unlabelled_data.csv ligger i samma mapp som Python-filen. 
+2. Kör Python-filen. 
+3. Programmet visar en graf med en linje baserad på medelvärdet av alla x, y-värden i unlabelled_data.csv samt de klassificerade punkterna utifrån den linjen.
 
 ---
 
 ## 📊 Övrigt
-Anledningen till att jag valde att ha med båda graferna är att jag ville visa min tankegång för uppgiften.  
-Innan jag räknade ut den mer exakta linjen hamnade alla punkter vars summa blev 0 precis på linjen, vilket gjorde att de inte kunde klassificeras. Därför hade jag ursprungligen med kod som kunde:
-- Ge svaret att punkten ligger *på* linjen, och  
-- Räkna antalet samt kartlägga eventuella felklassificeringar.
-Denna kod valde jag att inte ha med i det slutgiltiga programmet då det är i princip omöjligt att ange en punkt som skulle hamna på linjen efter att ha tagit fram den träffsäkra linjen.
-
-**Klassificering:** Jag använder både euclidean distance till både de uppskattade punkterna och de träffsäkra punkterna samt linjär klassificering mot den träffsäkra linjen.
+Efter att först ha skrivit kod som uppenbarligen hade med alldeles för mycket onödigt så som euklidiskt avstånd mellan punkterna och uppskattade mittpunkter av klusterna samt möjligheten att föra in egna punkter för klassificering så har jag nu bantat ner den till nuvarande format utifrån de synpunkter jag mottagit.
 
 ---
 
@@ -33,5 +19,6 @@ Denna kod valde jag att inte ha med i det slutgiltiga programmet då det är i p
 Programmet genererar även en fil `labelled_data.csv` om där inte redan finns en och skriver över innehållet i den filen om den redan finns. Där listas varje punkt med en klass (`0` eller `1`) beroende på vilken sida av linjen den ligger.
 
 ---
+
 ## Disclaimer
-Slutligen ska bara tilläggas att jag använde chatGPT för att omvandla min text i readme-filen till markdown-format efter att ha bett chatGPT kontrollera att min text uppfyllde kriterierna för vad den skulle innehålla varpå den erbjöd att formatera om min text till vad vi har här vilket jag sedan bara städade upp lite till (Disclaimern gjorde jag själv dock och jag antar att två # gör det till en titel men jag vet inte hur jag får in de små symbolerna) 
+Slutligen ska bara tilläggas att jag använde chatGPT för att omvandla min text i readme-filen till markdown-format efter att ha bett chatGPT kontrollera att min text uppfyllde kriterierna för vad den skulle innehålla varpå den erbjöd att formatera om min text till vad vi har här vilket jag sedan bara städade upp lite till (Disclaimern gjorde jag själv dock och jag listade ut att två # gör det till en titel men jag vet inte hur jag får in de små symbolerna) 
