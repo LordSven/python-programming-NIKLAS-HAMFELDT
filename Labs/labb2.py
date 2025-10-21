@@ -1,16 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import Counter
+import random as rd
 
-testdata = []
+datapoints = []
 with open('datapoints.txt', 'r') as f:
     next(f)
     for line in f:
         w, h, l = line.strip().split(',')
-        testdata.append((float(w), float(h), int(l)))
-width = [w for w, h, l in testdata]
-height = [h for w, h, l in testdata]
-pokemon = [l for w, h, l in testdata]
+        datapoints.append((float(w), float(h), int(l)))
+width = [w for w, h, l in datapoints]
+height = [h for w, h, l in datapoints]
+pokemon = [l for w, h, l in datapoints]
 pokespec = list(zip(width, height))
 pikaw = [25, 24.3, 22]
 pikah = [32, 31.5, 34]
@@ -45,7 +46,7 @@ plt.gca().set_aspect('equal')
 plt.show()
 felklassade = [ex for ex, pred, pok in zip(pokespec, pred, pokemon) if pred != pok]
 print(f'Felklassade mot den givna testdatan: {felklassade}.')
-print(f'Träffsäkerheten med given testdata är {(träffsäkerhet) * 100: .2f}%')
+print(f'Träffsäkerheten med given testdata är {träffsäkerhet:.2%}')
 
 print('Du har fångat en pokémon men vet inte om det är en pikachu eller en pichu. Följ anvisningarna i din pokédex för att klassificera den.')
 while True:
@@ -71,7 +72,7 @@ rättklassade_kNP = sum(a == b for a, b in zip(kNPpred, pokemon))
 träffsäkerhet_kNP = rättklassade_kNP / len(pokemon)
 felklassade_kNP = [ex for ex, pred, pok in zip(pokespec, kNPpred, pokemon) if pred != pok]
 print(f'Felklassade efter kNP (k=10): {felklassade_kNP}.')
-print(f'Träffsäkerheten med kNP (k=10) är {träffsäkerhet_kNP*100:.2f}%.')
+print(f'Träffsäkerheten med kNP (k=10) är {träffsäkerhet_kNP:.2%}.')
 neighbors, kNPpred = kNP(pokedex, pokespec, pokemon, k=10)
 x_pika = [x for (x, y), klass in zip(pokespec, pokemon) if klass == 1]
 y_pika = [y for (x, y), klass in zip(pokespec, pokemon) if klass == 1]
@@ -84,4 +85,37 @@ for (pt, lab) in neighbors:
     plt.scatter(*pt, edgecolors='black', facecolors='none', s=300, linewidths=2, label='Nearest pokémon' if neighbors.index((pt, lab)) == 0 else '')
 plt.legend()
 plt.gca().set_aspect('equal')
+plt.show()
+
+accuracy = []
+def slumpad_klassificering():
+    pikachu = [(w, h) for w, h, l in datapoints if l == 1]                                        # delar upp testdatan utifrån klasserna
+    pichu  = [(w, h) for w, h, l in datapoints if l == 0]                                         # delar upp testdatan utifrån klasserna
+    train_pikachu = rd.sample(pikachu, 50)                                                      # slumpar fram 50 pikachu-punkter för träningsdata
+    train_pichu  = rd.sample(pichu, 50)                                                         # slumpar fram 50 pichu-punkter för träningsdata
+    test_pikachu = [p for p in pikachu if p not in train_pikachu]                               # tilldelar resterande 25 pikachu-punkter till testdata
+    test_pichu  = [p for p in pichu if p not in train_pichu]                                    # tilldelar resterande 25 pichu-punkter till testdata
+    train_data = [(x, y, 1) for x, y in train_pikachu] + [(x, y, 0) for x, y in train_pichu]    # slår ihop träningspikachu och träningspichu till en lista
+    test_data = [(x, y, 1) for x, y in test_pikachu]  + [(x, y, 0) for x, y in test_pichu]      # slår ihop testpikachu och testpichu till en lista
+    train_dim_0 = [(x, y) for (x, y, label) in train_data if label == 0]                        # separerar dimensioner från label för att kunna jämföra euklidisk distans
+    train_dim_1 = [(x, y) for (x, y, label) in train_data if label == 1]                        # separerar dimensioner från label för att kunna jämföra euklidisk distans
+    pred = []
+    for (x, y, label) in test_data:
+        minpika = min(eucdist((x, y), ref) for ref in train_dim_1)                              # räknar ut euklidisk distans
+        minpichu = min(eucdist((x, y), ref) for ref in train_dim_0)                             # räknar ut euklidisk distans
+        if minpika < minpichu:                                                                  # utför jämförelsen
+            pred.append(1)                                                                      # sparar om pikachu förutspås
+        else:
+            pred.append(0)                                                                      # sparar om pichu förutspås
+    rättklassad = [label for (_, _, label) in test_data]                                        # jämför sedan förutspådda klasser mot faktiska från den slumpade testdatan
+    accuracy.append(sum(p == t for p, t in zip(pred, rättklassad)) / len(rättklassad))          # räknar ut träffsäkerhet av förutspåelserna
+for i in range(10):                                                                             # utför 10 iterationer av nya slumpningar
+    slumpad_klassificering()
+medelträffsäkerhet = sum(accuracy) / len(accuracy)
+print(f'Medelträffsäkerhet med slumpmässigt utvalda träningspunkter och testpunkter: {medelträffsäkerhet:.2%}')
+plt.plot(range(1, 11), accuracy, '-o')
+plt.axhline(y=medelträffsäkerhet, color='orange', label=f'Medelträffsäkerhet = {medelträffsäkerhet:.2%}')
+plt.xlabel('Iteration')
+plt.ylabel('Träffsäkerhet')
+plt.legend()
 plt.show()
