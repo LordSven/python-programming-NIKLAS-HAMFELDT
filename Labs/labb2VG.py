@@ -32,7 +32,7 @@ def slumpad_klassificering():
             pred.append(0)                                                                      # sparar om pichu förutspås
     rättklassad = [label for (_, _, label) in test_data]                                        # jämför sedan förutspådda klasser mot faktiska från den slumpade testdatan
     accuracy.append(sum(p == t for p, t in zip(pred, rättklassad)) / len(rättklassad))          # räknar ut träffsäkerhet av förutspåelserna
-for i in range(10):                                                                             # utför 10 iterationer av nya slumpningar
+for i in range(10):                                                                             # utför 10 iterationer av slumpad_klassificering med nya slumpningar i varje iteration
     slumpad_klassificering()
 medelträffsäkerhet = sum(accuracy) / len(accuracy)
 plt.plot(range(1, 11), accuracy, '-o')
