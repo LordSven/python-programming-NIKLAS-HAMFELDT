@@ -38,13 +38,11 @@ df.columns = ['Rang 2020', 'Rang 2019', 'Kommun', 'Folkmängd 2020', 'Folkmängd
 print(df)
 
 # c)
-df = df.sort_values(by='Folkmängd 2020', ascending=False).reset_index()
-df.drop('index', axis=1, inplace=True)
+df = df.sort_values(by='Folkmängd 2020', ascending=False).reset_index(drop=True)
 print(df)
 
 # d)
-df_reversed = df.sort_values(by='Folkmängd 2020', ascending=True).reset_index()
-df_reversed.drop('index', axis=1, inplace=True)
+df_reversed = df.sort_values(by='Folkmängd 2020', ascending=True).reset_index(drop=True)
 bot5_df = df_reversed.iloc[:5]
 print(bot5_df)
 
@@ -99,7 +97,7 @@ print(
     )
 
 # e)
-top10 = merged_full.sort_values(by='Total pop 2020', ascending=False).iloc[:20]
+top10 = merged_full.sort_values(by='Total pop 2020', ascending=False).iloc[:20] # Måste välja de 20 översta eftersom att städerna i merged_full listas två gånger, en för kvinnor och en för män
 bot10 = merged_full.sort_values(by='Total pop 2020', ascending=True).iloc[:20]
 fig, axes = plt.subplots(1, 2, dpi=100, figsize=(14, 4))
 titles = ['Könsdistribution I Sveriges 10 största städer', 'Könsdistribution I Sveriges 10 minsta städer']
@@ -136,6 +134,7 @@ top5_melted['Kön'] = top5_melted['Kön'].replace({
     'Folkmängd 2020_K': 'Kvinna', 
     'Folkmängd 2020_M': 'Man'
 })
+top5_melted = top5_melted.sort_values(by='Folkmängd', ascending=False)
 plt.figure(figsize=(10,6))
 sns.barplot(data=top5_melted, x='Folkmängd', y='Kommun', hue='Kön', palette={'Kvinna': 'red', 'Man': 'blue'})
 plt.title('Top 5 städer med störst skillnad i könsdistribution')
